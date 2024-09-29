@@ -1,5 +1,6 @@
 bookmark-as-extension
 =====================
+[dirkarnez/bookmarklet-generator](https://github.com/dirkarnez/bookmarklet-generator)
 ### Bookmark
 ```javascript
 javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.href})`).then(a => alert("done"));
