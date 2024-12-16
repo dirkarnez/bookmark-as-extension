@@ -6,6 +6,11 @@ bookmark-as-extension
 javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.href})`).then(a => alert("done"));
 ```
 
+### Loop video
+```javascript
+javascript:(() => {  document.getElementsByTagName("video")[0].loop = true; })();
+```
+
 ### Avoid close tab
 ```javascript
 javascript:window.onbeforeunload = ()  => { return "You have attempted to leave this page. Are you sure?"; }
