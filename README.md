@@ -57,4 +57,25 @@ function simulateTyping(element, text) {
 }
 
 simulateTyping(document.activeElement, 'Hello, World!');
+
+const serial = funcs =>
+    funcs.reduce((promise, func) =>
+        promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([]))
+
+serial('Hello, World!'.split("").map((e, i) => () => new Promise(res => setTimeout(() => {
+    
+    const event = new KeyboardEvent('keydown', {
+            key: e,
+            code: `Key${e.toUpperCase()}`,
+            char: e,
+            keyCode: 'Hello, World!'.charCodeAt(i),
+            bubbles: true,
+        });
+        document.activeElement.dispatchEvent(event);
+        
+        // Dispatch input event to update the value
+        document.activeElement.value += e;
+        document.activeElement.dispatchEvent(new Event('input', { bubbles: true }));
+      res();
+  }, 1000))))
 ```
