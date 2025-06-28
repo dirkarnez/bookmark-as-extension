@@ -30,3 +30,31 @@ javascript:(() => { for (event_name of ["visibilitychange", "webkitvisibilitycha
 ```javascript
 javascript:((gainValue) => { const video = document.querySelector('video'); if (!window.myGainNode) { const myAudioContext = new AudioContext(); const sourceNode = myAudioContext.createMediaElementSource(video); window.myGainNode = myAudioContext.createGain(); sourceNode.connect(window.myGainNode); window.myGainNode.connect(myAudioContext.destination); } window.myGainNode.gain.value = gainValue; })(prompt("Default is 1, enter the gain"))
 ```
+
+### Apache Guacamole keep session ([UDS](https://puuds.polyu.edu.hk/uds/page/services))
+```javascript
+function simulateTyping(element, text) {
+    for (let i = 0; i < text.length; i++) {
+        const event = new KeyboardEvent('keydown', {
+            key: text[i],
+            code: `Key${text[i].toUpperCase()}`,
+            char: text[i],
+            keyCode: text.charCodeAt(i),
+            bubbles: true,
+        });
+        element.dispatchEvent(event);
+        
+        // Dispatch input event to update the value
+        element.value += text[i];
+        element.dispatchEvent(new Event('input', { bubbles: true }));
+
+        // Simulate a small delay between keystrokes
+        if (i < text.length - 1) {
+            const delay = 100; // milliseconds
+            setTimeout(() => {}, delay);
+        }
+    }
+}
+
+simulateTyping(document.activeElement, 'Hello, World!');
+```
