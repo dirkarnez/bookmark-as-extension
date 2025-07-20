@@ -43,10 +43,14 @@ function makeid(length) {
     return result;
 }
 
-function dostuff() {
-    new Promise(res => {
+function dostuff({ signal }) {
+    new Promise((resolve, reject) => {
+        if (signal.aborted) {
+            reject(signal.reason);
+            return;
+        }
         const string = makeid(1);
-        setTimeout(() => {
+        const handle = setTimeout(() => {
             const event = new KeyboardEvent('keydown', {
                 key: string,
                 code: `Key${string.toUpperCase()}`,
@@ -59,13 +63,22 @@ function dostuff() {
             // Dispatch input event to update the value
             document.activeElement.value += string;
             document.activeElement.dispatchEvent(new Event('input', { bubbles: true }));
-            res();
+            resolve();
         }, 1000);
+        signal.addEventListener("abort", () => {
+            // Stop the main operation
+            // Reject the promise with the abort reason.
+            clearTimeout(handle);
+            reject(signal.reason);
+        });
     })
     .then(() => {
-        dostuff();
+        dostuff({ signal });
     });
 }
 
-dostuff();
+const controller = new AbortController();
+dostuff({ signal: controller.signal });
+// to stop:
+// controller.abort(); 
 ```
