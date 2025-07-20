@@ -33,49 +33,39 @@ javascript:((gainValue) => { const video = document.querySelector('video'); if (
 
 ### Apache Guacamole keep session ([UDS](https://puuds.polyu.edu.hk/uds/page/services))
 ```javascript
-function simulateTyping(element, text) {
-    for (let i = 0; i < text.length; i++) {
-        const event = new KeyboardEvent('keydown', {
-            key: text[i],
-            code: `Key${text[i].toUpperCase()}`,
-            char: text[i],
-            keyCode: text.charCodeAt(i),
-            bubbles: true,
-        });
-        element.dispatchEvent(event);
-        
-        // Dispatch input event to update the value
-        element.value += text[i];
-        element.dispatchEvent(new Event('input', { bubbles: true }));
-
-        // Simulate a small delay between keystrokes
-        if (i < text.length - 1) {
-            const delay = 100; // milliseconds
-            setTimeout(() => {}, delay);
-        }
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+    return result;
 }
 
-simulateTyping(document.activeElement, 'Hello, World!');
+function dostuff() {
+    new Promise(res => {
+        const string = makeid(1);
+        setTimeout(() => {
+            const event = new KeyboardEvent('keydown', {
+                key: string,
+                code: `Key${string.toUpperCase()}`,
+                char: string,
+                keyCode: string.charCodeAt(0),
+                bubbles: true,
+            });
+            document.activeElement.dispatchEvent(event);
+            
+            // Dispatch input event to update the value
+            document.activeElement.value += string;
+            document.activeElement.dispatchEvent(new Event('input', { bubbles: true }));
+            res();
+        }, 1000);
+    })
+    .then(() => {
+        dostuff();
+    });
+}
 
-const serial = funcs =>
-    funcs.reduce((promise, func) =>
-        promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([]))
-
-serial('Hello, World!'.split("").map((e, i) => () => new Promise(res => setTimeout(() => {
-    
-    const event = new KeyboardEvent('keydown', {
-            key: e,
-            code: `Key${e.toUpperCase()}`,
-            char: e,
-            keyCode: 'Hello, World!'.charCodeAt(i),
-            bubbles: true,
-        });
-        document.activeElement.dispatchEvent(event);
-        
-        // Dispatch input event to update the value
-        document.activeElement.value += e;
-        document.activeElement.dispatchEvent(new Event('input', { bubbles: true }));
-      res();
-  }, 1000))))
+dostuff();
 ```
