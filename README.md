@@ -21,6 +21,11 @@ javascript:window.onbeforeunload = ()  => { return "You have attempted to leave 
 javascript:(() => {for (event_name of ["visibilitychange", "webkitvisibilitychange", "blur"]) { window.addEventListener(event_name, function(event) { event.stopImmediatePropagation(); }, true); }})()
 ```
 
+### YouTube playlist all unique
+```javascript
+javascript:alert([...new Set(document.getElementsByClassName("yt-simple-endpoint style-scope ytd-playlist-video-renderer"))].length == document.getElementsByClassName("yt-simple-endpoint style-scope ytd-playlist-video-renderer").length)
+```
+
 ### IG loop video
 ```javascript
 javascript:(() => { for (event_name of ["visibilitychange", "webkitvisibilitychange", "blur"]) { window.addEventListener(event_name, function(event) { event.stopImmediatePropagation(); }, true); for (var i = 0; i < document.getElementsByTagName("video")[0].parentNode.childNodes.length; i++) { if (document.getElementsByTagName("video")[0].parentNode.childNodes[i] != document.getElementsByTagName("video")[0]) { document.getElementsByTagName("video")[0].parentNode.removeChild(document.getElementsByTagName("video")[0].parentNode.childNodes[i]); } }; document.getElementsByTagName("video")[0].controls = true; }})()
