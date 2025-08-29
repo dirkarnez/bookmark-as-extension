@@ -6,6 +6,11 @@ bookmark-as-extension
 javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.href})`).then(a => alert("done"));
 ```
 
+### eBook
+```javascript
+javascript:(() => { const downloadFile = (imgUri, name) => { const link = document.createElement('a'); document.body.appendChild(link); link.href = imgUri; link.target = '_self'; link.download = name; link.click() }; const serial = funcs => funcs.reduce((promise, func) => promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([])); serial(Array(window.bookData.pageCount).fill(NaN).map((_, i) => () => new Promise(res => setTimeout(() => { bookData.getPageManifest(i, true, data => { downloadFile(data.url, `${`${i}`.padStart(`${window.bookData.pageCount - 1}`.length, "0")}.jpg`); res(); }); }, 1000)))); })();
+```
+
 ### Loop video
 ```javascript
 javascript:(() => {  document.getElementsByTagName("video")[0].loop = true; })();
