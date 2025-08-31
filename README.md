@@ -28,7 +28,7 @@ javascript:(() => {for (event_name of ["visibilitychange", "webkitvisibilitychan
 
 ### YouTube playlist all unique
 ```javascript
-javascript:(() => {const names = Array.from(document.getElementsByClassName("yt-simple-endpoint style-scope ytd-playlist-video-renderer")).map(a => a.innerText);alert([...new Set(names)].length == names.length && names.every(a => a != `[Deleted video]`));})();
+javascript:(() => {const names = Array.from(document.getElementsByClassName("yt-simple-endpoint style-scope ytd-playlist-video-renderer")).map(a => a.innerText);alert([...new Set(names)].length == names.length && names.every(a => a != `[Deleted video]`) ? `${[...new Set(names)].length} unique videos found` : `false`);})();
 ```
 
 ### IG loop video
