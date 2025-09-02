@@ -18,7 +18,7 @@ javascript:document.querySelector("* > div.Overlay-footer.Overlay-footer--alignE
 
 ### eBook
 ```javascript
-javascript:(() => { const downloadFile = (imgUri, name) => { const link = document.createElement('a'); document.body.appendChild(link); link.href = imgUri; link.target = '_self'; link.download = name; link.click() }; const serial = funcs => funcs.reduce((promise, func) => promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([])); serial(Array(window.bookData.pageCount).fill(NaN).map((_, i) => () => new Promise(res => setTimeout(() => { bookData.getPageManifest(i, true, data => { downloadFile(data.url, `${`${i}`.padStart(`${window.bookData.pageCount - 1}`.length, "0")}.jpg`); res(); }); }, 1000)))); })();
+javascript:(() => { const downloadFile = (imgUri, name) => { const link = document.createElement('a'); document.body.appendChild(link); link.href = imgUri; link.target = '_self'; link.download = name; link.click() }; const serial = funcs => funcs.reduce((promise, func) => promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([])); serial(Array(window.bookData.pageCount).fill(NaN).map((_, i) => () => new Promise(res => setTimeout(() => { bookData.getPageManifest(i, true, data => { downloadFile(data.url, `${`${i}`.padStart(`${window.bookData.pageCount - 1}`.length, "0")}.jpg`); res(); }); }, 1000)))).then(() => { alert(`${window.bookData.ISBN}`)}); })();
 ```
 
 ### Loop video
