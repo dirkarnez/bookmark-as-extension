@@ -1,9 +1,14 @@
 bookmark-as-extension
 =====================
 [dirkarnez/bookmarklet-generator](https://github.com/dirkarnez/bookmarklet-generator)
-### Bookmark
+### Bookmark as markdown
 ```javascript
 javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.href})`).then(a => alert("done"));
+```
+
+### Bookmark as HTML
+```
+javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" target="_blank">${document.title}</a>`).then(a => alert("done"));
 ```
 
 ### Delete Workflow action
