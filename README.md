@@ -7,7 +7,7 @@ javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.
 ```
 
 ### Bookmark as HTML
-```
+```javascript
 javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" target="_blank">${document.title}</a>`).then(a => alert("done"));
 ```
 
