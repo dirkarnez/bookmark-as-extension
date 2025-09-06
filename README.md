@@ -22,6 +22,7 @@ javascript:(() => { const downloadFile = (imgUri, name) => { const link = docume
 ```
 ```javascript
 javascript:(() => {
+
 function getNearestAncestorByTagName(htmlElementNode, tagName, classNameToFind) {
     let testNode = htmlElementNode;
     while (testNode != undefined && testNode.tagName != undefined && testNode.tagName.toLowerCase() != tagName && Array.from(testNode.classList).includes(classNameToFind)) {
@@ -37,14 +38,24 @@ function getNearestAncestorByTagName(htmlElementNode, tagName, classNameToFind) 
     return testNode;
 }
 
-Array.from(document.getElementsByClassName("bookName lineTwo")).forEach((element) => {
-	const button = document.createElement("button");
-	button.addEventListener("click", (e) => {
-		const parent = getNearestAncestorByTagName(element, "div", "productBook");
-		navigator.clipboard.writeText(`[${element.innerText}](https://polyu.airitibooks.com/Publication/Details?publicationID=${parent.id})`).then(a => alert("done"));
-	});
-	element.appendChild(button);
-});
+Array
+    .from(document.getElementsByClassName("bookName lineTwo"))
+    .forEach((element) => {
+    	const button = document.createElement("button");
+        const parent = getNearestAncestorByTagName(element, "div", "productBook");
+        button.innerText = `Copy`;
+        button.style.position = "absolute";
+        button.style.top = "0";
+        button.style.right = "0";
+        button.style.background = "red";
+        button.style.zIndex = "9999";
+        
+    	button.addEventListener("click", (e) => {
+    		
+    		navigator.clipboard.writeText(`[${element.innerText}](https://polyu.airitibooks.com/Publication/Details?publicationID=${parent.id})`).then(a => alert("done"));
+    	});
+    	element.appendChild(button);
+    });
 })();
 ```
 
