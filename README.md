@@ -25,8 +25,9 @@ javascript:(() => {
 
 function getNearestAncestorByTagName(htmlElementNode, tagName, classNameToFind) {
     let testNode = htmlElementNode;
-    while (testNode != undefined && testNode.tagName != undefined && testNode.tagName.toLowerCase() != tagName && Array.from(testNode.classList).includes(classNameToFind)) {
+    while (testNode != undefined && testNode.tagName != undefined && (testNode.tagName.toLowerCase() != tagName || !Array.from(testNode.classList).includes(classNameToFind))) {
         testNode = testNode.parentNode;
+        debugger
         if (testNode == window.document) {
             return undefined;
         }
@@ -47,7 +48,6 @@ Array
         button.style.zIndex = "9999";
         
     	button.addEventListener("click", (e) => {
-    		
     		navigator.clipboard.writeText(`[${element.innerText}](https://polyu.airitibooks.com/Publication/Details?publicationID=${parent.id})`).then(a => alert("done"));
     	});
     	element.appendChild(button);
