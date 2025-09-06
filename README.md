@@ -21,6 +21,7 @@ javascript:document.querySelector("* > div.Overlay-footer.Overlay-footer--alignE
 javascript:(() => { const downloadFile = (imgUri, name) => { const link = document.createElement('a'); document.body.appendChild(link); link.href = imgUri; link.target = '_self'; link.download = name; link.click() }; const serial = funcs => funcs.reduce((promise, func) => promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([])); serial(Array(window.bookData.pageCount).fill(NaN).map((_, i) => () => new Promise(res => setTimeout(() => { bookData.getPageManifest(i, true, data => { downloadFile(data.url, `${`${i}`.padStart(`${window.bookData.pageCount - 1}`.length, "0")}.jpg`); res(); }); }, 1000)))).then(() => { alert(`${window.bookData.ISBN}`)}); })();
 ```
 ```javascript
+javascript:(() => {
 function getNearestAncestorByTagName(htmlElementNode, tagName, classNameToFind) {
     let testNode = htmlElementNode;
     while (testNode != undefined && testNode.tagName != undefined && testNode.tagName.toLowerCase() != tagName && Array.from(testNode.classList).includes(classNameToFind)) {
@@ -44,6 +45,7 @@ Array.from(document.getElementsByClassName("bookName lineTwo")).forEach((element
 	});
 	element.appendChild(button);
 });
+})();
 ```
 
 ### Loop video
