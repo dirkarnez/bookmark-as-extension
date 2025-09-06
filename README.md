@@ -30,10 +30,6 @@ function getNearestAncestorByTagName(htmlElementNode, tagName, classNameToFind) 
         if (testNode == window.document) {
             return undefined;
         }
-        // debugger;
-        // if (htmlElementNode.tagName.toLowerCase() === tagName) {
-        //     return htmlElementNode;
-        // }
     }
     return testNode;
 }
