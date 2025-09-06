@@ -20,6 +20,31 @@ javascript:document.querySelector("* > div.Overlay-footer.Overlay-footer--alignE
 ```javascript
 javascript:(() => { const downloadFile = (imgUri, name) => { const link = document.createElement('a'); document.body.appendChild(link); link.href = imgUri; link.target = '_self'; link.download = name; link.click() }; const serial = funcs => funcs.reduce((promise, func) => promise.then(result => func().then(Array.prototype.concat.bind(result))), Promise.resolve([])); serial(Array(window.bookData.pageCount).fill(NaN).map((_, i) => () => new Promise(res => setTimeout(() => { bookData.getPageManifest(i, true, data => { downloadFile(data.url, `${`${i}`.padStart(`${window.bookData.pageCount - 1}`.length, "0")}.jpg`); res(); }); }, 1000)))).then(() => { alert(`${window.bookData.ISBN}`)}); })();
 ```
+```javascript
+function getNearestAncestorByTagName(htmlElementNode, tagName, classNameToFind) {
+    let testNode = htmlElementNode;
+    while (testNode != undefined && testNode.tagName != undefined && testNode.tagName.toLowerCase() != tagName && Array.from(testNode.classList).includes(classNameToFind)) {
+        testNode = testNode.parentNode;
+        if (testNode == window.document) {
+            return undefined;
+        }
+        // debugger;
+        // if (htmlElementNode.tagName.toLowerCase() === tagName) {
+        //     return htmlElementNode;
+        // }
+    }
+    return testNode;
+}
+
+Array.from(document.getElementsByClassName("bookName lineTwo")).forEach((element) => {
+	const button = document.createElement("button");
+	button.addEventListener("click", (e) => {
+		const parent = getNearestAncestorByTagName(element, "div", "productBook");
+		navigator.clipboard.writeText(`[${element.innerText}](https://polyu.airitibooks.com/Publication/Details?publicationID=${parent.id})`).then(a => alert("done"));
+	});
+	element.appendChild(button);
+});
+```
 
 ### Loop video
 ```javascript
