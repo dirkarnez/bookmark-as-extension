@@ -27,7 +27,6 @@ function getNearestAncestorByTagName(htmlElementNode, tagName, classNameToFind) 
     let testNode = htmlElementNode;
     while (testNode != undefined && testNode.tagName != undefined && (testNode.tagName.toLowerCase() != tagName || !Array.from(testNode.classList).includes(classNameToFind))) {
         testNode = testNode.parentNode;
-        debugger
         if (testNode == window.document) {
             return undefined;
         }
