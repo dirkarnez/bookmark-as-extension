@@ -1,6 +1,7 @@
 bookmark-as-extension
 =====================
 [dirkarnez/bookmarklet-generator](https://github.com/dirkarnez/bookmarklet-generator)
+
 ### Bookmark as markdown
 ```javascript
 javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.href})`).then(a => alert("done"));
@@ -13,7 +14,10 @@ javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" targ
 
 ### GitHub web commit message
 ```javascript
-javascript:(() => {document.getElementById("commit-message-input").value = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)/g)][0][4];})()
+javascript:(() => {
+const matched = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)/g)][0];
+document.getElementById("commit-message-input").value = `- ${matched[2] == "edit" ? "update" : "add" } ${matched[4]}`;
+})();
 ```
 
 ### Delete Workflow action
