@@ -16,7 +16,7 @@ javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" targ
 ```javascript
 javascript:(() => {
 const matched = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)/g)][0];
-document.getElementById("commit-message-input").value = `- ${matched[2] == "edit" ? "update" : "add" } ${matched[4]}`;
+document.getElementById("commit-message-input").value = matched[2] == "edit" ? `- update ${matched[4]}` : "- add ";
 })();
 ```
 
