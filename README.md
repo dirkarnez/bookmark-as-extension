@@ -15,8 +15,8 @@ javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" targ
 ### GitHub web commit message
 ```javascript
 javascript:(() => {
-const matched = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)/g)][0];
-document.getElementById("commit-message-input").value = matched[2] == "edit" ? `- update ${matched[4]}` : "- add ";
+const matched = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/(.*)/g)][0];
+document.getElementById("commit-message-input").value = matched[2] == "edit" ? `- update ${decodeURIComponent(matched[4])}` : "- add ";
 })();
 ```
 
