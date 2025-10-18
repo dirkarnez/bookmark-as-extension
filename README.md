@@ -11,6 +11,11 @@ javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.
 javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" target="_blank">${document.title}</a>`).then(a => alert("done"));
 ```
 
+### GitHub web commit message
+```javascript
+javascript:document.getElementById("commit-message-input").value = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)/g)][0][4]
+```
+
 ### Delete Workflow action
 ```javascript
 javascript:document.querySelector("* > div.Overlay-footer.Overlay-footer--alignEnd.d-block > form > button").click()
