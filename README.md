@@ -13,7 +13,7 @@ javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" targ
 
 ### GitHub web commit message
 ```javascript
-javascript:document.getElementById("commit-message-input").value = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)/g)][0][4]
+javascript:(() => {document.getElementById("commit-message-input").value = [...window.location.pathname.matchAll(/\/dirkarnez\/([^\/]+)\/([^\/]+)\/([^\/]+)\/([^\/]+)/g)][0][4];})()
 ```
 
 ### Delete Workflow action
