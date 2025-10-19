@@ -96,13 +96,21 @@ javascript:((gainValue) => { const video = document.querySelector('video'); if (
 ### Apache Guacamole keep session ([UDS](https://puuds.polyu.edu.hk/uds/page/services))
 ```javascript
 function makeid(length) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    /*var result           = '';
+    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
     for ( var i = 0; i < length; i++ ) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    return result;
+    return result;*/
+
+    return Array.from({length: length})
+        .map((_, i) => {
+            var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            return characters.charAt(Math.floor(Math.random() * charactersLength));
+        })
+        .join("")
 }
 
 function dostuff({ signal }) {
