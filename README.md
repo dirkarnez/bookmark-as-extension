@@ -12,6 +12,63 @@ javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.
 javascript:navigator.clipboard.writeText(`<a href="${window.location.href}" target="_blank">${document.title}</a>`).then(a => alert("done"));
 ```
 
+### MS Form autofill (wip)
+```javascript
+function makeid(length) {
+    /*var result           = '';
+    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;*/
+
+    return Array.from({length: length})
+        .map((_, i) => {
+            var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            return characters.charAt(Math.floor(Math.random() * charactersLength));
+        })
+        .join("")
+}
+
+function dostuff({ signal }) {
+    new Promise((resolve, reject) => {
+        if (signal.aborted) {
+            reject(signal.reason);
+            return;
+        }
+        const string = makeid(1);
+        const handle = setTimeout(() => {
+            const event = new KeyboardEvent('keydown', {
+                key: string,
+                code: `Key${string.toUpperCase()}`,
+                char: string,
+                keyCode: string.charCodeAt(0),
+                bubbles: true,
+            });
+            document.getElementById("DatePicker0-label").dispatchEvent(event);
+            
+            // Dispatch input event to update the value
+            document.getElementById("DatePicker0-label").value += string;
+            document.getElementById("DatePicker0-label").dispatchEvent(new Event('input', { bubbles: true }));
+            resolve();
+        }, 1000);
+        signal.addEventListener("abort", () => {
+            // Stop the main operation
+            // Reject the promise with the abort reason.
+            clearTimeout(handle);
+            reject(signal.reason);
+        });
+    })
+    .then(() => {
+        dostuff({ signal });
+    });
+}
+
+const controller = new AbortController();
+dostuff({ signal: controller.signal });
+```
 ### GitHub web commit message
 ```javascript
 javascript:(() => {
