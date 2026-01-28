@@ -2,6 +2,9 @@ bookmark-as-extension
 =====================
 [dirkarnez/bookmarklet-generator](https://github.com/dirkarnez/bookmarklet-generator)
 
+### Notes
+- To make bookmarklet portable, save the `javascript:` prefix code as `.url` shortcut and drag the file to bookmark bar
+
 ### Bookmark as markdown
 ```javascript
 javascript:navigator.clipboard.writeText(`[${document.title}](${window.location.href})`).then(a => alert("done"));
