@@ -218,3 +218,6 @@ dostuff({ signal: controller.signal });
 ```js
 Array.from(document.getElementsByTagName("*")).forEach(e => { e.style.userSelect = "auto" });
 ```
+
+
+<!-- Security scan triggered at 2026-09-15 09:31:59 -->
