@@ -4,6 +4,7 @@ bookmark-as-extension
 
 ### Notes
 - To make bookmarklet portable, save the `javascript:` prefix code as `.url` shortcut and drag the file to bookmark bar
+- Bookmarklet works on Android - but coding `javascript:` directly in address bar does not work
 
 ### Bookmark as markdown
 ```javascript
